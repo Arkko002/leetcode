@@ -1,46 +1,5 @@
 function isValidSudoku(board: string[][]): boolean {
-  let x_start: number = 1;
-  let y_start: number = 1;
-  let x_end: number = 3;
-  let y_end: number = 3;
-  while (x_end <= board[0].length || y_end <= board.length) {
-    console.log(
-      `x_start: ${x_start}, x_end: ${x_end}, y_start: ${y_start}, y_end: ${y_end}`,
-    );
-    const foundNumbers: string[] = [];
-    for (let y = y_start; y < y_end; y++) {
-      for (let x = x_start; x < x_end; x++) {
-        if (board[y][x] !== ".") {
-          const alreadyFoundNumber: string | undefined = foundNumbers.find(
-            (value: string) => {
-              return value === board[y][x];
-            },
-          );
-          console.log(
-            `alreadyFoundNumber: ${alreadyFoundNumber}, board[y][x]: ${
-              board[y][x]
-            }`,
-          );
-          if (alreadyFoundNumber) {
-            console.log("HERE1");
-            return false;
-          }
-
-          foundNumbers.push(board[y][x]);
-
-          if (!isValidRowAndColumn(board[y][x], x, y, board)) {
-            return false;
-          }
-        }
-      }
-    }
-
-    x_start += 3;
-    x_end += 3;
-    y_start += 3;
-    y_end += 3;
-  }
-  return true;
+  
 }
 
 const isValidRowAndColumn = (
@@ -52,7 +11,7 @@ const isValidRowAndColumn = (
   console.log(
     `value: ${value}, value_x_row: ${value_row}, value_y_col: ${value_col}`,
   );
-  for (let x = 0; x < 9; x++) {
+  for (let x = 0; x < 8; x++) {
     console.log(
       `board[value_col][x]: ${
         board[value_col][x]
@@ -67,10 +26,10 @@ const isValidRowAndColumn = (
     }
   }
 
-  for (let y = 0; y < 9; y++) {
+  for (let y = 0; y < 8; y++) {
     console.log(
       `board[value_row][y]: ${
-        board[value_row][y]
+        board[y][value_row]
       }, y: ${y}, value_row: ${value_row}`,
     );
     if (y === value_col) {
